@@ -7,7 +7,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
 
-TEXT_EMBEDDING_MODEL = "BAAI/bge-large-zh" # Or you can use "BAAI/bge-large-en-v1.5" instead
+TEXT_EMBEDDING_MODEL = "BAAI/bge-m3"
 VECTOR_DB_NAME = "AI_llm"
 VECTOR_DB_PATH = "./DB/"
 CHUNK_SIZE = 1000
@@ -27,7 +27,7 @@ text_splitter = RecursiveCharacterTextSplitter(
     is_separator_regex = False,
 )
 
-text_embedding=HuggingFaceEmbeddings(
+text_embedder=HuggingFaceEmbeddings(
     model_name = TEXT_EMBEDDING_MODEL
 )
 
@@ -57,7 +57,7 @@ def write_2_DB(filename):
         documents_list = []
         embeddings_list = []
         ids_list = []
-        vector = text_embedding.embed_query(chunk)
+        vector = text_embedder.embed_query(chunk)
         
         documents_list.append(chunk)
         embeddings_list.append(vector)
