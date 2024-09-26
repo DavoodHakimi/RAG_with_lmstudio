@@ -4,16 +4,16 @@ from tqdm import tqdm
 import chromadb
 import pypdf
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 
-TEXT_EMBEDDING_MODEL = "BAAI/bge-m3"
-VECTOR_DB_NAME = "AI_llm"
-VECTOR_DB_PATH = "./DB/"
+TEXT_EMBEDDING_MODEL = "BAAI/bge-m3" # Or any other Embedding model from HuggingFace
+VECTOR_DB_NAME = "YOUR_DB_NAME"
+VECTOR_DB_PATH = "PATH_TO_YOUR_VECTOR_DB"
 CHUNK_SIZE = 1000
 OVERLAP = 10
 
-docs_path="./Docs/"
+docs_path="YOUR_PDF_DOCUMENTS_DIR"
 file_names = [f for f in listdir(docs_path) if isfile(join(docs_path, f))]
 
 chroma_client = chromadb.PersistentClient(path = VECTOR_DB_PATH)
