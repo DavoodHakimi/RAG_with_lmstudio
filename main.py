@@ -4,7 +4,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 
 CHEOMA_PATH = "PATH_TO_YOUR_VECTOR_DB"
 VECTOR_DB_NAME = "YOUR_DB_NAME"
-MODEL_NAME = "Qwen/Qwen2.5-14B-Instruct-GGUF" 
+MODEL_NAME = "MODEL_NAME" 
 PORT= 1234 #Default LM Studio Port
 TEXT_EMBEDDING_MODEL = "BAAI/bge-m3"
 
