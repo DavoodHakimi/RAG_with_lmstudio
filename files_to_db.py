@@ -50,24 +50,22 @@ def write_2_DB(filename):
     for i, chunk in tqdm(enumerate(chunks),total=len(chunks),desc="Writing to Database"):
         doc_id=f"{filename}_{i}"
 
-        if doc_id in existing_ids:
-            continue
+        if doc_id not in existing_ids:
+            # Chroma can't add big size bachtes to Vector DB, so i did this to handle adding large files to DB
+            documents_list = []
+            embeddings_list = []
+            ids_list = []
+            vector = text_embedder.embed_query(chunk)
+            
+            documents_list.append(chunk)
+            embeddings_list.append(vector)
+            ids_list.append(doc_id)
 
-        # Chroma can't add big size bachtes to Vector DB, so i did this to handle adding large files to DB
-        documents_list = []
-        embeddings_list = []
-        ids_list = []
-        vector = text_embedder.embed_query(chunk)
-        
-        documents_list.append(chunk)
-        embeddings_list.append(vector)
-        ids_list.append(doc_id)
-
-        collection.add(
-            embeddings=embeddings_list,
-            documents=documents_list,
-            ids=ids_list
-        )
+            collection.add(
+                embeddings=embeddings_list,
+                documents=documents_list,
+                ids=ids_list
+            )
 
 
 for filename in file_names:
